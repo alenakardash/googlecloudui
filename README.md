@@ -9,7 +9,6 @@ A simple project for automating tests scenarios for [Google Pricing Calculator](
 Other class files include the locators, variables and methods to perform test scenarios.
 
 #### Tools:
-
 ChromeDriver version 91.0.4472.101
 
 Java 1.8
@@ -20,7 +19,7 @@ Selenium 3.141.59
 
 Maven 3.0.0
 
-#### Installation and test run
+Allure 2.14
 
 1. Download and set up JAVA:
 
@@ -58,7 +57,7 @@ C:\Program Files\Java\jdk1.8.0_02/bin
 
 https://chromedriver.chromium.org/downloads
 
-Set up environment variable for chromedriver
+- Set up environment variable for chromedriver
 
 ##### for MacOS:
 
@@ -84,6 +83,8 @@ Download the binary and unpack it.
 
 - Add MAVEN_HOME to system variables
 
+##### for MacOS:
+
 `nano ~/.bash_profile`
 
 `export M2_HOME=path/to/maven`
@@ -97,7 +98,22 @@ Download the binary and unpack it.
 - On the Advanced tab, select Environment Variables, and then edit MAVEN_HOME to point to where the maven is located.
 - Add {maven home}/bin to the Path
 
+5. Download Allure framework
+
+##### for MacOS:
+
+`brew install allure`
+
+##### for Windows:
+
+To install Allure, download and install Scoop and then execute in the Powershell:
+
+`scoop install allure`
  
 6. Navigate to googlecloudui directory and run:
 
-`mvn test`
+`mvn clean test`
+
+7. To generate an Allure report run:
+
+`allure serve /home/path/to/project/allure-results/`

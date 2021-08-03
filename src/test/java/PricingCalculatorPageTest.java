@@ -1,24 +1,27 @@
+import allure.AllureListener;
+import allure.BaseClass;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-
-public class PricingCalculatorPageTest {
-    private WebDriver driver;
+@Listeners({AllureListener.class})
+public class PricingCalculatorPageTest extends BaseClass {
+    public WebDriver driver;
     private static String query = "Google Cloud Platform Pricing Calculator";
     JavascriptExecutor executor;
 
     @BeforeMethod
     public void browserSetUp() {
-        driver = new ChromeDriver();
+        BaseClass baseClass = new BaseClass();
+        driver = baseClass.initializeDriver();
         executor = (JavascriptExecutor) driver;
     }
 
-    @Test
+    @Test(description = "Search Google Pricing Calculator, create Compute Engine and check estimated price")
     public void checkEstimatedComputeEnginePrice() {
         ComputeEnginePage computeEnginePage = new HomePage(driver)
                 .openPage()
@@ -43,7 +46,7 @@ public class PricingCalculatorPageTest {
         Assert.assertTrue(actualEstimatedPrice.equals("USD 1,083.33"));
     }
 
-    @Test
+    @Test(description = "Create indox using email generator, create Compute Engine, verify estimated price in email is equal estimated in form")
     public void checkEstimatedComputeEnginePriceFromEmail() {
         YopRandomAddressGeneratorPage yopRandomAddressGeneratorPage = new YopMailHomePage(driver)
                 .openPage()
@@ -91,6 +94,9 @@ public class PricingCalculatorPageTest {
 
     @AfterMethod
     public void browserTearDown() {
-        driver.quit();
+        tdriver.get().quit();
+        if (tdriver.get() != null) {
+            tdriver.remove();
+        }
     }
 }
